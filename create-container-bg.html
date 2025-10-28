@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generar Container Background</title>
+</head>
+<body>
+    <h1>Generador de Container Background</h1>
+    <p>Se generará una imagen container-bg.png automáticamente al abrir esta página.</p>
+    
+    <canvas id="bgCanvas" width="800" height="600" style="border: 1px solid #ccc; display: none;"></canvas>
+    
+    <script>
+        const canvas = document.getElementById('bgCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Crear un background decorativo para el container
+        const width = 800;
+        const height = 600;
+        
+        // Gradiente principal de fondo
+        const mainGradient = ctx.createLinearGradient(0, 0, width, height);
+        mainGradient.addColorStop(0, '#f0f4ff');
+        mainGradient.addColorStop(0.3, '#e8edff');
+        mainGradient.addColorStop(0.6, '#f5f0ff');
+        mainGradient.addColorStop(1, '#ede9ff');
+        
+        ctx.fillStyle = mainGradient;
+        ctx.fillRect(0, 0, width, height);
+        
+        // Agregar círculos decorativos con gradientes suaves
+        for (let i = 0; i < 8; i++) {
+            const x = Math.random() * width;
+            const y = Math.random() * height;
+            const radius = Math.random() * 150 + 80;
+            
+            const circleGradient = ctx.createRadialGradient(x, y, 0, x, y, radius);
+            circleGradient.addColorStop(0, 'rgba(102, 126, 234, 0.08)');
+            circleGradient.addColorStop(0.5, 'rgba(118, 75, 162, 0.05)');
+            circleGradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+            
+            ctx.fillStyle = circleGradient;
+            ctx.beginPath();
+            ctx.arc(x, y, radius, 0, Math.PI * 2);
+            ctx.fill();
+        }
+        
+        // Agregar patrones decorativos sutiles
+        ctx.strokeStyle = 'rgba(102, 126, 234, 0.1)';
+        ctx.lineWidth = 1;
+        for (let i = 0; i < 15; i++) {
+            const x1 = Math.random() * width;
+            const y1 = Math.random() * height;
+            const angle = Math.random() * Math.PI * 2;
+            const length = Math.random() * 200 + 100;
+            
+            ctx.beginPath();
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x1 + Math.cos(angle) * length, y1 + Math.sin(angle) * length);
+            ctx.stroke();
+        }
+        
+        // Agregar puntos decorativos
+        ctx.fillStyle = 'rgba(102, 126, 234, 0.15)';
+        for (let i = 0; i < 30; i++) {
+            const x = Math.random() * width;
+            const y = Math.random() * height;
+            const size = Math.random() * 2 + 0.5;
+            
+            ctx.beginPath();
+            ctx.arc(x, y, size, 0, Math.PI * 2);
+            ctx.fill();
+        }
+        
+        // Descargar como PNG
+        canvas.toBlob(function(blob) {
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'container-bg.png';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            alert('¡Container-bg.png generado exitosamente! Puedes cerrar esta página.');
+        });
+    </script>
+</body>
+</html>
+

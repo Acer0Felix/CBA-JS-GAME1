@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generar Tile</title>
+</head>
+<body>
+    <h1>Generador de Tile</h1>
+    <p>Se generará una imagen tile.png automáticamente al abrir esta página.</p>
+    
+    <canvas id="tileCanvas" width="200" height="200" style="border: 1px solid #ccc; display: none;"></canvas>
+    
+    <script>
+        const canvas = document.getElementById('tileCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Crear un patrón de azulejo/textura
+        const patternSize = 40;
+        
+        // Fondo base con degradado
+        const gradient = ctx.createLinearGradient(0, 0, 200, 200);
+        gradient.addColorStop(0, '#4a90e2');
+        gradient.addColorStop(0.5, '#357abd');
+        gradient.addColorStop(1, '#2667a3');
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, 200, 200);
+        
+        // Agregar un patrón de cuadrícula decorativo
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+        ctx.lineWidth = 2;
+        
+        for (let x = 0; x <= 200; x += patternSize) {
+            ctx.beginPath();
+            ctx.moveTo(x, 0);
+            ctx.lineTo(x, 200);
+            ctx.stroke();
+        }
+        
+        for (let y = 0; y <= 200; y += patternSize) {
+            ctx.beginPath();
+            ctx.moveTo(0, y);
+            ctx.lineTo(200, y);
+            ctx.stroke();
+        }
+        
+        // Agregar algunos patrones decorativos
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
+        for (let x = 0; x < 200; x += patternSize) {
+            for (let y = 0; y < 200; y += patternSize) {
+                if ((x + y) % (patternSize * 2) === 0) {
+                    ctx.fillRect(x + 5, y + 5, patternSize - 10, patternSize - 10);
+                }
+            }
+        }
+        
+        // Descargar como PNG
+        canvas.toBlob(function(blob) {
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'tile.png';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            alert('¡Tile.png generado exitosamente! Puedes cerrar esta página.');
+        });
+    </script>
+</body>
+</html>
+

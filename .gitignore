@@ -1,0 +1,15 @@
+# Archivos generados por los creadores
+*.png
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+
+# Node modules (si se agregan en el futuro)
+node_modules/
+package-lock.json
+

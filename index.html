@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Grilla 1x10</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Juego de Grilla</h1>
+        <p class="instructions">Usa las flechas del teclado ← → o los botones para mover el sprite</p>
+        <div class="grid-container">
+            <div class="grid" id="gameGrid"></div>
+        </div>
+        <div class="controls">
+            <button class="control-btn" id="btnLeft">
+                <img src="btn-left.png" alt="Flecha Izquierda" class="btn-image" />
+            </button>
+            <button class="control-btn" id="btnRight">
+                <img src="btn-right.png" alt="Flecha Derecha" class="btn-image" />
+            </button>
+        </div>
+        <div class="info">
+            <p>Posición actual: <span id="position">1</span></p>
+        </div>
+    </div>
+
+    <!-- Modal de felicitaciones -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <h2 class="modal-title">¡Felicitaciones!</h2>
+            <p class="modal-message">Has llegado al final de la grilla</p>
+            <div class="modal-buttons">
+                <button class="modal-btn btn-primary" id="btnNewGame">De Nuevo</button>
+                <button class="modal-btn btn-secondary" id="btnExit">Salir</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
+

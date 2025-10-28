@@ -98,9 +98,7 @@ h1 {
     aspect-ratio: 1;
     border: none;
     border-radius: 10px;
-    background-image: url('tile.png');
-    background-size: cover;
-    background-position: center;
+    background: transparent;
     display: flex;
     justify-content: center;
     align-items: center;
